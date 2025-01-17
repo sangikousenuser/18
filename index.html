@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>18になる計算式生成器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        input {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>18になる計算式生成器</h1>
+    <p>二つの値を入力してください:</p>
+    
+    <input type="number" id="value1" placeholder="値1">
+    <input type="number" id="value2" placeholder="値2">
+    <button onclick="generateEquation()">計算式を生成</button>
+    
+    <p id="result"></p>
+
+    <script>
+        function generateEquation() {
+            const val1 = parseFloat(document.getElementById('value1').value);
+            const val2 = parseFloat(document.getElementById('value2').value);
+
+            if (isNaN(val1) || isNaN(val2)) {
+                document.getElementById('result').innerText = "正しい値を入力してください。";
+                return;
+            }
+
+            const equation = `${val1} + ${18 - val1 - val2} + ${val2} = 18`;
+
+            document.getElementById('result').innerText = equation;
+        }
+    </script>
+
+</body>
+</html>
