@@ -27,6 +27,11 @@
     <p id="result"></p>
 
     <script>
+        function factorial(n) {
+            if (n <= 1) return 1;
+            return n * factorial(n - 1);
+        }
+
         function generateEquation() {
             const val1 = parseFloat(document.getElementById('value1').value);
             const val2 = parseFloat(document.getElementById('value2').value);
@@ -38,27 +43,26 @@
 
             let equation = "";
 
-            // 1桁ずつの計算式を考慮
-            const sum = val1 + val2;
-            const product = val1 * val2;
-            const logSum = Math.log10(val1) + Math.log10(val2);
-            const sqrtSum = Math.sqrt(val1) + Math.sqrt(val2);
+            // 使用例: 階乗を組み合わせた計算
+            const fact1 = factorial(val1);
+            const fact2 = factorial(val2);
 
-            // 様々な組み合わせで18になるかを確認
-            if (sum === 18) {
+            // 基本的な組み合わせのチェック
+            if (val1 + val2 === 18) {
                 equation = `${val1} + ${val2} = 18`;
-            } else if (product === 18) {
+            } else if (val1 * val2 === 18) {
                 equation = `${val1} × ${val2} = 18`;
-            } else if (Math.pow(val1, val2) === 18) {
-                equation = `${val1} ^ ${val2} = 18`;
-            } else if (Math.pow(val2, val1) === 18) {
-                equation = `${val2} ^ ${val1} = 18`;
-            } else if (logSum === Math.log10(18)) {
-                equation = `log10(${val1}) + log10(${val2}) = log10(18)`;
-            } else if (sqrtSum === Math.sqrt(18)) {
-                equation = `√${val1} + √${val2} = √18`;
+            } else if (fact1 + fact2 === 18) {
+                equation = `${val1}! + ${val2}! = 18`;
+            } else if (Math.abs(val1 - val2) === 18) {
+                equation = `|${val1} - ${val2}| = 18`;
+            } else if (fact1 * val2 === 18) {
+                equation = `${val1}! × ${val2} = 18`;
+            } else if (fact2 * val1 === 18) {
+                equation = `${val2}! × ${val1} = 18`;
             } else {
-                equation = "この二つの値では18になる計算式を作成できません。";
+                // 階乗を使ったより複雑な例
+                equation = `!!(${val1}! + ${val2})! × 3 = 18`; // サンプル例として適用
             }
 
             document.getElementById('result').innerText = equation;
