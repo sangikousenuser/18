@@ -31,32 +31,32 @@
             const val1 = parseFloat(document.getElementById('value1').value);
             const val2 = parseFloat(document.getElementById('value2').value);
 
-            if (isNaN(val1) || isNaN(val2)) {
-                document.getElementById('result').innerText = "正しい値を入力してください。";
+            if (isNaN(val1) || isNaN(val2) || val1 <= 0 || val2 <= 0) {
+                document.getElementById('result').innerText = "正の値を入力してください。";
                 return;
             }
 
             let equation = "";
 
-            // 足し算で18になる場合
-            if (val1 + val2 === 18) {
+            // 1桁ずつの計算式を考慮
+            const sum = val1 + val2;
+            const product = val1 * val2;
+            const logSum = Math.log10(val1) + Math.log10(val2);
+            const sqrtSum = Math.sqrt(val1) + Math.sqrt(val2);
+
+            // 様々な組み合わせで18になるかを確認
+            if (sum === 18) {
                 equation = `${val1} + ${val2} = 18`;
-            }
-            // 引き算で18になる場合
-            else if (val1 - val2 === 18) {
-                equation = `${val1} - ${val2} = 18`;
-            } else if (val2 - val1 === 18) {
-                equation = `${val2} - ${val1} = 18`;
-            }
-            // 掛け算で18になる場合
-            else if (val1 * val2 === 18) {
+            } else if (product === 18) {
                 equation = `${val1} × ${val2} = 18`;
-            }
-            // 割り算で18になる場合
-            else if (val1 / val2 === 18) {
-                equation = `${val1} ÷ ${val2} = 18`;
-            } else if (val2 / val1 === 18) {
-                equation = `${val2} ÷ ${val1} = 18`;
+            } else if (Math.pow(val1, val2) === 18) {
+                equation = `${val1} ^ ${val2} = 18`;
+            } else if (Math.pow(val2, val1) === 18) {
+                equation = `${val2} ^ ${val1} = 18`;
+            } else if (logSum === Math.log10(18)) {
+                equation = `log10(${val1}) + log10(${val2}) = log10(18)`;
+            } else if (sqrtSum === Math.sqrt(18)) {
+                equation = `√${val1} + √${val2} = √18`;
             } else {
                 equation = "この二つの値では18になる計算式を作成できません。";
             }
