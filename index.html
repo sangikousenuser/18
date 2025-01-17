@@ -36,7 +36,30 @@
                 return;
             }
 
-            const equation = `${val1} + ${18 - val1 - val2} + ${val2} = 18`;
+            let equation = "";
+
+            // 足し算で18になる場合
+            if (val1 + val2 === 18) {
+                equation = `${val1} + ${val2} = 18`;
+            }
+            // 引き算で18になる場合
+            else if (val1 - val2 === 18) {
+                equation = `${val1} - ${val2} = 18`;
+            } else if (val2 - val1 === 18) {
+                equation = `${val2} - ${val1} = 18`;
+            }
+            // 掛け算で18になる場合
+            else if (val1 * val2 === 18) {
+                equation = `${val1} × ${val2} = 18`;
+            }
+            // 割り算で18になる場合
+            else if (val1 / val2 === 18) {
+                equation = `${val1} ÷ ${val2} = 18`;
+            } else if (val2 / val1 === 18) {
+                equation = `${val2} ÷ ${val1} = 18`;
+            } else {
+                equation = "この二つの値では18になる計算式を作成できません。";
+            }
 
             document.getElementById('result').innerText = equation;
         }
